@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EuroMillions Probability Results</title>
+    <!-- Link Bootstrap for basic styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-whvPiIiAfN6txZvzEwT9V2QcDAB6k6U/PrKc3yUOAwbiBBFMkKqG3C4A6Mw9xdNJ" crossorigin="anonymous">
+    <!-- Link to your custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- Header with EuroMillions branding -->
+    <header class="bg-primary text-white py-4">
+        <div class="container text-center">
+            <h1 class="display-4">Fernando EuroMillions Probability Results</h1>
+            <p class="lead">Find out the most and least common numbers and stars! Sa makadaog lang!</p>
+        </div>
+    </header>
+
+    <!-- Main content section -->
+    <main class="container my-5">
+        <!-- Display most and least common numbers and stars -->
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="text-info">Most Common Numbers</h2>
+                <div class="numbers-box bg-light p-3 rounded shadow">
+                    <p class="h3 text-center">{{ most_common_numbers | join(", ") }}</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h2 class="text-info">Least Common Numbers</h2>
+                <div class="numbers-box bg-light p-3 rounded shadow">
+                    <p class="h3 text-center">{{ least_common_numbers | join(", ") }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row my-5">
+            <div class="col-md-6">
+                <h2 class="text-warning">Most Common Stars</h2>
+                <div class="stars-box bg-light p-3 rounded shadow">
+                    <p class="h3 text-center">{{ most_common_stars | join(", ") }}</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h2 class="text-warning">Least Common Stars</h2>
+                <div class="stars-box bg-light p-3 rounded shadow">
+                    <p class="h3 text-center">{{ least_common_stars | join(", ") }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Display percentages of each number and star -->
+        <div class="row my-5">
+            <div class="col-md-6">
+                <h2 class="text-primary">Number Frequencies (Percentage)</h2>
+                <ul class="list-group">
+                    {% for number, percentage in number_percentages.items() %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Number {{ number }}
+                        <span class="badge bg-primary rounded-pill">{{ percentage | round(2) }}%</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="col-md-6">
+                <h2 class="text-primary">Star Frequencies (Percentage)</h2>
+                <ul class="list-group">
+                    {% for star, percentage in star_percentages.items() %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Star {{ star }}
+                        <span class="badge bg-warning rounded-pill">{{ percentage | round(2) }}%</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    
+
+    <!-- Bootstrap JavaScript (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-7jqIe9BkPo9QXDBiOY9SO7HJ3jNs5xYFVGlvvVWknmWvIbGtLFlRJZtsN6V8wdpM" crossorigin="anonymous"></script>
+</body>
+</html>
